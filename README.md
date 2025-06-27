@@ -33,8 +33,9 @@ It supports two types of users: **Students** and **Instructors**.
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/rohitYadav03/coursehub-api
-   cd course-enrollment-api
+git clone https://github.com/rohitYadav03/coursehub-api
+cd coursehub-api
+
 Install dependencies
 
 npm install
