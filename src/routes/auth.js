@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const {UserModel} = require("../models/user.js");
 const {validation} = require("../utils/validation.js");
+const { userAuth } = require("../middlewares/userAuth.js");
 require('dotenv').config()
 
 
@@ -67,6 +68,11 @@ const token = jwt.sign({id : userDetails._id, role : userDetails.role},process.e
 } catch (error) {
     res.status(400).json({message : error.message})
 }
+});
+
+authRouter.post("/logout", userAuth, (req,res) => {
+  res.clearCookie("userToken");
+  res.status(200).json({message : "logout"})
 })
 
 module.exports = { authRouter };

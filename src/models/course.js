@@ -37,7 +37,7 @@ category : {
  type : String,
         required : true,
         trim : true,
-        minlength : 3,
+        minlength : 2,
         maxlength : 50,
         enum: ["Web", "Mobile", "Data Science", "AI", "DevOps","web3", "Other"],
        default: "Other"
