@@ -35,7 +35,7 @@ res.status(201).json({ message: "Course created successfully", course: courseDet
 
 courseRouter.get("/", async(req,res) => {
     try {
-        const allCourse = await CourseModel.find({});
+        const allCourse = await CourseModel.find({}).populate("instructor", "name email");
     res.status(200).json(allCourse)
     } catch (error) {
         res.status(400).json({message : error.message})
@@ -45,7 +45,6 @@ courseRouter.get("/", async(req,res) => {
 courseRouter.get("/:id", async(req,res) => {
     try {
         const courseId = req.params.id;
-        console.log(courseId);
         
         if(!courseId){
             throw new Error("Enter a valid course Id");  

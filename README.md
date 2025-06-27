@@ -1,93 +1,170 @@
-✅ Goal of the Project
-Build a basic course selling platform with:
-Login/register
-Role-based access (student and instructor)
-Course creation and enrollment
-No payments, no Stripe — just practicing backend logic
+# 🎓 Course Enrollment Backend API
 
-🔑 1. SCHEMAS YOU NEED (with simple explanation)
-👤 User Schema
-Field	What it stores
-name	User’s name
-email	Unique email
-password	Hashed password
-role	'student' or 'instructor'
+This is a fully functional backend REST API for a course enrollment platform, built using **Node.js**, **Express**, **MongoDB**, and **JWT Authentication**.
 
-Used to login, register, and determine access.
-No course-related logic here — it's only for identity and role.
+It supports two types of users: **Students** and **Instructors**.
 
-📘 Course Schema
-Field	What it stores
-title, description	Course info
-price	Course price
-thumbnail	Image URL (optional)
-category	Like "coding", "design", etc.
-instructor	Which user created it (User ID)
-lessons	Array of { title, content }
-createdAt	Timestamp
+---
 
-Instructor creates courses. Students can browse and enroll in them.
+## 💻 Tech Stack
 
-🛒 Enrollment Schema (like purchase)
-Field	What it stores
-userId	Student who enrolled
-courseId	The course enrolled in
-pricePaid	Price of course at purchase
-status	'completed' (default)
-purchasedAt	Date/time of enrollment
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- JWT Authentication
+- HTTP-only Cookies
+- Bcrypt (Password hashing)
 
-When a student “buys” (enrolls) in a course, this document is created.
+---
 
-🌐 2. API ROUTES — What Each One Does
-🔐 AUTH ROUTES
-Method	Route	        What it does
-POST	/auth/register	 Register user (send name, email, password, role)
-POST	/auth/login	     Login user → returns JWT
-GET	/auth/profile	     Get current user info (JWT protected)
+## 🚀 Features
 
-📘 COURSE ROUTES
-Method	Route	Who can access	          What it does
-GET	/courses	    Public	              List all courses
-GET	/courses/:id	Public	              View one course in detail
-POST	/courses	Instructor            only Create a new course
-PATCH	/courses/:id	Instructor (owner only)	Update your own course
-DELETE	/courses/:id	Instructor (owner only)	Delete your own course
-POST	/courses/:id/lessons	Instructor (owner only)	Add lessons to a course
+- ✅ Signup & Login with JWT (stored in cookies)
+- ✅ Role-based access (Student / Instructor)
+- ✅ View and Edit profile
+- ✅ Instructors can create and delete their courses
+- ✅ Public course listing
+- ✅ Students can enroll in courses
+- ✅ Students can view enrolled courses
 
-🛒 ENROLLMENT ROUTES
-Method	Route	Who can access	What it does
-POST	/enrollments	Student only	Enroll in a course → pass courseId in body
-GET	/enrollments/my	Student only	List all enrolled courses for that student
-GET	/courses/:id/students	Instructor (owner only)	View which students enrolled in your course
+---
 
-🧱 3. MIDDLEWARES TO WRITE
-Middleware	What it does
-auth	Verifies JWT token and sets req.user
-requireRole('student')	Only allows access if role matches
-ownsCourse	Checks if logged-in user owns the course (for edit/delete)
+## 📦 Installation & Setup
 
-🎯 4. LEARNING YOU'LL GET
-How to build protected routes with roles
-How to model a real-world app with related collections
-How to use MongoDB population (populate) to link data
-How to think like a backend engineer (modular design, access control, etc.)
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/rohitYadav03/coursehub-api
+   cd course-enrollment-api
+Install dependencies
 
-🟩 FINAL THOUGHTS
-This is a perfect intermediate project:
-You won't touch Stripe or UIs.
-You’ll focus only on solid, real-world backend logic.
-You'll learn more than basics but won’t burn out.
-Let me know when you want to begin — I can help you:
-Design the route folders and files
-Plan your controller logic
-Or test your APIs one-by-one
-You're doing exactly the right thing 👏
+npm install
+Create a .env file
+
+MONGO_URL=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+
+Run the server
+
+node index.js
+The server will run at: http://localhost:3000
+
+🔐 Environment Variables
+Variable	Description
+MONGO_URL	MongoDB connection URI
+JWT_SECRET	Secret key for JWT token
+
+📁 Folder Structure
+
+├── config/
+│   └── db.js
+├── middlewares/
+│   └── userAuth.js
+├── models/
+│   ├── user.js
+│   ├── course.js
+│   └── enrollment.js
+├── routes/
+│   ├── auth.js
+│   ├── profile.js
+│   └── courses.js
+├── index.js
+├── package.json
+├── .env
+└── README.md
+
+📬 API Endpoints
+🔐 Auth Routes /auth
+Method	Endpoint	Description
+POST	/signup	    User registration
+POST	/login	    User login
+GET	    /logout	     Logout (clear cookie)
+
+👤 Profile Routes /profile
+Method	Endpoint	Description
+GET	    /view	    View user profile
+PATCH	/edit	    Edit user profile
+
+📚 Course Routes /courses
+Method	Endpoint	Description
+POST	/	Create a new course (Instructor only)
+GET	/	Get all courses
+GET	/:id	Get course by ID
+DELETE	/:id	Delete own course (Instructor only)
+
+🎓 Enrollment Routes
+Method	Endpoint	Description
+POST	/enroll/:courseId	Enroll in a course (Student)
+GET	/my-courses	Get student's enrolled courses
+
+🔄 Sample API Flow to Test (Use Postman)
+1. Register Users
+
+POST /auth/signup
+{
+  "name": "Rohit",
+  "email": "rohit@gmail.com",
+  "password": "Rohit@1234",
+  "role": "instructor"
+}
+
+
+POST /auth/signup
+{
+  "name": "Amit",
+  "email": "amit@gmail.com",
+  "password": "123456",
+  "role": "student"
+}
+2. Login
+
+POST /auth/login
+{
+  "email": "amit@gmail.com",
+  "password": "123456"
+}
+3. Create Course (Instructor only)
+
+
+POST /courses
+{
+  "title": "Mastering React.js",
+  "description": "A complete frontend course using React.js and Redux.",
+  "price": 999.99,
+  "thumbnail": "https://example.com/images/react.jpg",
+  "category": "Frontend"
+}
+4. View All Courses
+
+
+GET /courses
+5. Enroll in a Course (Student only)
+
+
+POST /enroll/:courseId
+6. View Enrolled Courses (Student only)
+
+
+GET /my-courses
+7. Delete a Course (Instructor only)
 
 
 
+DELETE /courses/:id
+✅ Status
 
+All backend functionality has been tested with Postman and is working:
+Auth ✅
+Profile ✅
+Course Create/Delete ✅
+View Courses ✅
+Enroll ✅
+My Courses ✅
 
+🧠 Future Ideas
+Add course reviews & ratings
+Add pagination and filters
+Add admin panel
 
-
-
-
+✍️ Author
+Built by Rohit Yadav
+GitHub: https://github.com/rohitYadav03
