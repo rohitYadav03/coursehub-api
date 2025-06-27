@@ -1,13 +1,32 @@
 {
   "dependencies": {
-    "bcryptjs": "^3.0.2",
+    "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.16.0"
+    "mongoose": "^8.16.0",
+    "validator": "^13.15.15"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
-  }
+  },
+  "name": "coursehub-api",
+  "description": "Goal of the Project Build a basic course selling platform with: Login/register Role-based access (student and instructor) Course creation and enrollment No payments, no Stripe — just practicing backend logic",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohitYadav03/coursehub-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rohitYadav03/coursehub-api/issues"
+  },
+  "homepage": "https://github.com/rohitYadav03/coursehub-api#readme"
 }
