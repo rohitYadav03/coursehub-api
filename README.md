@@ -1,3 +1,4 @@
+
 # 🎓 Course Enrollment Backend API
 
 This is a fully functional backend REST API for a course enrollment platform, built using **Node.js**, **Express**, **MongoDB**, and **JWT Authentication**.
@@ -32,7 +33,7 @@ It supports two types of users: **Students** and **Instructors**.
 ## 📦 Installation & Setup
 
 1. **Clone the repository**
-   ```bash
+
 git clone https://github.com/rohitYadav03/coursehub-api
 cd  coursehub-api
 
@@ -54,99 +55,74 @@ Variable	Description
 MONGO_URL	MongoDB connection URI
 JWT_SECRET	Secret key for JWT token
 
-📬 API Endpoints
-🔐 Auth Routes /auth
-Method	Endpoint	Description
-POST	/signup	    User registration
-POST	/login	    User login
-GET	    /logout	     Logout (clear cookie)
+📁 Folder Structure
 
-👤 Profile Routes /profile
-Method	Endpoint	Description
-GET	    /view	    View user profile
-PATCH	/edit	    Edit user profile
+├── config
 
-📚 Course Routes /courses
-Method	Endpoint	Description
-POST	/	Create a new course (Instructor only)
-GET	/	Get all courses
-GET	/:id	Get course by ID
-DELETE	/:id	Delete own course (Instructor only)
+│   └── db.js
 
-🎓 Enrollment Routes
-Method	Endpoint	Description
-POST	/enroll/:courseId	Enroll in a course (Student)
-GET	/my-courses	Get student's enrolled courses
+├── middlewares
 
-🔄 Sample API Flow to Test (Use Postman)
-1. Register Users
-
-POST /auth/signup
-{
-  "name": "Rohit",
-  "email": "rohit@gmail.com",
-  "password": "Rohit@1234",
-  "role": "instructor"
-}
+│   └── userAuth.js
 
 
-POST /auth/signup
-{
-  "name": "Amit",
-  "email": "amit@gmail.com",
-  "password": "123456",
-  "role": "student"
-}
-2. Login
+├── models
 
-POST /auth/login
-{
-  "email": "amit@gmail.com",
-  "password": "123456"
-}
-3. Create Course (Instructor only)
+│   ├── user.js
+
+│   ├── course.js
+
+│   └── enrollment.js
 
 
-POST /courses
-{
-  "title": "Mastering React.js",
-  "description": "A complete frontend course using React.js and Redux.",
-  "price": 999.99,
-  "thumbnail": "https://example.com/images/react.jpg",
-  "category": "Frontend"
-}
-4. View All Courses
+├── routes
+
+│   ├── auth.js
+
+│   ├── profile.js
+
+│   └── courses.js
 
 
-GET /courses
-5. Enroll in a Course (Student only)
+├── index.js
 
+├── package.json
 
-POST /enroll/:courseId
-6. View Enrolled Courses (Student only)
+├── .env
 
-
-GET /my-courses
-7. Delete a Course (Instructor only)
+└── README.md
 
 
 
-DELETE /courses/:id
-✅ Status
 
-All backend functionality has been tested with Postman and is working:
+All backend functionality has been tested with Postman and is
+ working:
+
 Auth ✅
+
 Profile ✅
+
 Course Create/Delete ✅
+
 View Courses ✅
+
 Enroll ✅
+
 My Courses ✅
 
+
 🧠 Future Ideas
+
 Add course reviews & ratings
+
 Add pagination and filters
+
 Add admin panel
 
+
 ✍️ Author
+
 Built by Rohit Yadav
+
 GitHub: https://github.com/rohitYadav03
+
