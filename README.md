@@ -34,7 +34,7 @@ It supports two types of users: **Students** and **Instructors**.
 1. **Clone the repository**
    ```bash
 git clone https://github.com/rohitYadav03/coursehub-api
-cd coursehub-api
+cd  coursehub-api
 
 Install dependencies
 
@@ -53,25 +53,6 @@ The server will run at: http://localhost:3000
 Variable	Description
 MONGO_URL	MongoDB connection URI
 JWT_SECRET	Secret key for JWT token
-
-📁 Folder Structure
-
-├── config/
-│   └── db.js
-├── middlewares/
-│   └── userAuth.js
-├── models/
-│   ├── user.js
-│   ├── course.js
-│   └── enrollment.js
-├── routes/
-│   ├── auth.js
-│   ├── profile.js
-│   └── courses.js
-├── index.js
-├── package.json
-├── .env
-└── README.md
 
 📬 API Endpoints
 🔐 Auth Routes /auth

@@ -43,8 +43,7 @@ app.post("/enroll/:courseId",userAuth, async(req,res) => {
 
 app.get("/my-courses", userAuth,async(req,res) => {
     try {
-        const allCourse = await EnrollmentModel.find({userId : req.user.id}).populate("courseId").select({ __v: 0, createdAt: 0, updatedAt: 0 })
-;
+        const allCourse = await EnrollmentModel.find({userId : req.user.id}).populate("courseId").select({ __v: 0, createdAt: 0, updatedAt: 0 });
         res.send(allCourse)
     } catch (error) {
         res.status(500).json({ message: error.message });
